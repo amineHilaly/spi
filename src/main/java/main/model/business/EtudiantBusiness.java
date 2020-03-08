@@ -7,11 +7,12 @@ import java.util.Optional;
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import main.model.entities.Etudiant;
 import main.model.repositories.EtudiantRepository;
 
-@Resource
+@Repository
 public class EtudiantBusiness {
 	@Autowired
 	private EtudiantRepository etudiantRepo;
