@@ -25,7 +25,7 @@ public class PromotionPK implements Serializable {
     @NotNull
     @Size(min = 1, max = 8)
     @ManyToOne(optional=false)
-    @JoinColumn(name="formation")
+    @JoinColumn(name="code_formation")
     private Formation Formation;
     @Basic(optional = false)
     @NotNull
@@ -61,6 +61,12 @@ public class PromotionPK implements Serializable {
 		super();
 		Formation = formation;
 		this.anneeUniversitaire = anneeUniversitaire;
+	}
+
+
+	@Override
+	public String toString() {
+		return "PromotionPK [Formation=" + Formation + ", anneeUniversitaire=" + anneeUniversitaire + "]";
 	}
 
 	

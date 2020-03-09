@@ -11,9 +11,11 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import main.model.entities.Etudiant;
 import main.model.entities.Promotion;
 import main.model.entities.PromotionPK;
 import main.model.entities.Qualificatif;
+import main.model.repositories.EtudiantRepository;
 import main.model.repositories.PromotionRepository;
 import main.model.repositories.QualificatifRepository;
 
@@ -21,7 +23,8 @@ import main.model.repositories.QualificatifRepository;
 public class PromotionBusiness {
 	@Autowired
 	private PromotionRepository promotionRepo;
-	
+	@Autowired
+	private EtudiantRepository etudiantRepo;
 	
 	
 	
@@ -35,6 +38,33 @@ public class PromotionBusiness {
 		return promotionRepo.findById(pk);
 	}
 	
+	public boolean SavePromotion(Promotion promotion) {
+		
+		promotionRepo.save(promotion);
+		return true;
+		
+	}
+	
+	
+	public boolean UpdatePromotion(Promotion promotion) {
+		
+		promotionRepo.save(promotion);
+		return true;
+		
+	}
+
+
+	public boolean deletePromotion(PromotionPK pk) {
+		
+		List<Etudiant> listEtudiant=null;
+		Promotion promotion = promotionRepo.findById(pk).get();
+		//listEtudiant = etudiantRepo.findbyPromotion(pk);
+		if(listEtudiant.isEmpty()) {
+			promotionRepo.delete(promotion);
+		}
+		
+		return true;
+	}
 	
 		
 }
