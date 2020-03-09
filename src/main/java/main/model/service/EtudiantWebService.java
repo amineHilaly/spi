@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import main.model.business.EtudiantBusiness;
 import main.model.entities.Etudiant;
+import main.model.entities.Promotion;
 
 @RestController
 @RequestMapping("Etudiant")
@@ -44,7 +45,8 @@ public class EtudiantWebService {
 	}
 	
 	@PostMapping(consumes = "application/json", produces = "application/json")
-	 public void creerEtudiant(@RequestBody List<Etudiant> etudiant) {
+	 public void creerEtudiant(@RequestBody Etudiant etudiant) {
+		System.out.println(etudiant);
 		etudiantBusiness.creerEtudiant(etudiant);
 	}
 	
@@ -59,10 +61,10 @@ public class EtudiantWebService {
 	    return new ResponseEntity<String>("Etudiant a été suprimé", HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/all")
-	public @ResponseBody ResponseEntity<String> deleteAllEtudiants() {
-		etudiantBusiness.deleteAllEtudiants();
-	    return new ResponseEntity<String>("Etudiants ont été suprimé", HttpStatus.OK);
+	@GetMapping(path="/promotion", produces = "application/json")
+	public Collection<Etudiant> getByPromotion(@PathVariable Promotion promo){
+		
+		return etudiantBusiness.findByPromotion(promo);
 	}
 	
 
