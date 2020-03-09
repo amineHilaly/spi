@@ -8,6 +8,8 @@ package main.model.entities;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -67,8 +69,14 @@ public class Promotion implements Serializable {
     @JoinColumn(name = "CODE_FORMATION", referencedColumnName = "CODE_FORMATION", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Formation formation;
+    
+    
+    
+    
+   
 
-    public Promotion() {
+
+	public Promotion() {
     }
 
 	public PromotionPK getPromotionPK() {
@@ -165,6 +173,14 @@ public class Promotion implements Serializable {
 		this.processusStage = processusStage;
 		this.commentaire = commentaire;
 		this.formation = formation;
+	}
+
+	@Override
+	public String toString() {
+		return "Promotion [promotionPK=" + promotionPK + ", siglePromotion=" + siglePromotion + ", nbMaxEtudiant="
+				+ nbMaxEtudiant + ", dateReponseLp=" + dateReponseLp + ", dateReponseLalp=" + dateReponseLalp
+				+ ", dateRentree=" + dateRentree + ", lieuRentree=" + lieuRentree + ", processusStage=" + processusStage
+				+ ", commentaire=" + commentaire + ", formation=" + formation ;
 	}    
     
     

@@ -14,9 +14,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import main.model.business.EtudiantBusiness;
 import main.model.business.QualificatifBusiness;
 import main.model.entities.Qualificatif;
+import main.model.repositories.EtudiantRepository;
 
 
 @RestController
@@ -26,6 +27,9 @@ public class QualificatifWebService {
 	
 	@Autowired
 	QualificatifBusiness business;
+	
+	@Autowired
+	EtudiantBusiness etudiantBusiness;
 	
 	@GetMapping()
 	public List <Qualificatif> getAll() {

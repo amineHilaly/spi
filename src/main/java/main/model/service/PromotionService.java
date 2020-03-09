@@ -33,6 +33,7 @@ public class PromotionService {
 	@GetMapping()
 	public List<Promotion> getAllPromotion(){
 		
+		System.out.println();
 		return promotionBusiness.getAllPromotion();
 		
 	}
