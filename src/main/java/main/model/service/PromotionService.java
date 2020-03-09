@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import main.model.business.EtudiantBusiness;
 import main.model.business.PromotionBusiness;
+import main.model.entities.Etudiant;
 import main.model.entities.Promotion;
 import main.model.entities.PromotionPK;
 
@@ -31,8 +32,8 @@ public class PromotionService {
 	@RequestMapping(value="/promotions", method=RequestMethod.GET)
 	@GetMapping()
 	public List<Promotion> getAllPromotion(){
-		System.out.println(promotionBusiness.getAllPromotion());
-		return null;
+		System.out.println();
+		return promotionBusiness.getAllPromotion();
 		
 	}
 	
@@ -67,13 +68,14 @@ public class PromotionService {
 	
 	@RequestMapping(value="/Deletepromotion", method=RequestMethod.DELETE)
 	public void DeletePromotion(@RequestBody PromotionPK promotion) {
-		
+		promotionBusiness.deletePromotion(promotion);
+		System.out.println("bien supprimé");
 		
 	}
 	
-	@RequestMapping(value="/Etudiantspromotion", method=RequestMethod.GET)
-	public boolean EtudiantsByPromotion(@RequestBody PromotionPK pk) {
+	@RequestMapping(value="/Etudiantspromotion", method=RequestMethod.POST)
+	public List<Etudiant> EtudiantsByPromotion(@RequestBody PromotionPK pk) {
 		
-		return promotionBusiness.deletePromotion(pk);
+		return promotionBusiness.EtudiantByPromotion(pk);
 	}
 }

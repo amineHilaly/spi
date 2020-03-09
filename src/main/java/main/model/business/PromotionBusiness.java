@@ -58,12 +58,18 @@ public class PromotionBusiness {
 		
 		List<Etudiant> listEtudiant=null;
 		Promotion promotion = promotionRepo.findById(pk).get();
-		//listEtudiant = etudiantRepo.findbyPromotion(pk);
+		listEtudiant = etudiantRepo.findByPromotion(promotion);
 		if(listEtudiant.isEmpty()) {
 			promotionRepo.delete(promotion);
+			return true;
 		}
 		
-		return true;
+		return false;
+	}
+	
+	public List<Etudiant> EtudiantByPromotion(PromotionPK promotionpk){
+		Promotion promotion = promotionRepo.findById(promotionpk).get();
+		return etudiantRepo.findByPromotion(promotion);
 	}
 	
 		
