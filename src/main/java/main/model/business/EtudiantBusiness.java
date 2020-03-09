@@ -10,15 +10,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import main.model.entities.Etudiant;
+import main.model.entities.Promotion;
 import main.model.repositories.EtudiantRepository;
+import main.model.repositories.PromotionRepository;
 
 @Repository
 public class EtudiantBusiness {
 	@Autowired
 	private EtudiantRepository etudiantRepo;
 	
-	public void creerEtudiant(List<Etudiant> etudiant) {
-		etudiantRepo.saveAll(etudiant );
+	public void creerEtudiant(Etudiant etudiant) {
+		etudiantRepo.save(etudiant );
 	}
 	
 	public void updateEtudiant(Etudiant etudiant) {
@@ -41,8 +43,10 @@ public class EtudiantBusiness {
 		
 	}
 	
-	public void deleteAllEtudiants() {
-		etudiantRepo.deleteAll();
+	public List<Etudiant> findByPromotion(Promotion promo){
+		//return etudiantRepo.findByPromotion();
+		return etudiantRepo.findByPromotion(promo);
+		
 	}
 	
 	

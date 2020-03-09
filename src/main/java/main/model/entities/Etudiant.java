@@ -1,49 +1,31 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package main.model.entities;
 
 import java.io.Serializable;
-import java.math.BigInteger;
-import java.util.Collection;
-import java.util.Date;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.Date;
+import main.model.entities.Promotion;
+
 
 /**
- *
- * @author DOSI
+ * The persistent class for the ETUDIANT database table.
+ * 
  */
 @Entity
-@Table(name = "ETUDIANT")
-@XmlRootElement
 public class Etudiant implements Serializable {
+	private static final long serialVersionUID = 1L;
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
+	@Id
+	@Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
-    @Column(name = "NO_ETUDIANT")
-    private String noEtudiant;
-    @Basic(optional = false)
+	@Column(name="NO_ETUDIANT")
+	private String noEtudiant;
+	@Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
     @Column(name = "NOM")
@@ -79,7 +61,6 @@ public class Etudiant implements Serializable {
     @Size(max = 20)
     @Column(name = "MOBILE")
     private String mobile;
-    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
@@ -115,171 +96,20 @@ public class Etudiant implements Serializable {
     private BigInteger groupeTp;
     @Column(name = "GROUPE_ANGLAIS")
     private BigInteger groupeAnglais;
-    
-    public Etudiant() {
-    }
 
-    public Etudiant(String noEtudiant) {
+	//uni-directional many-to-one association to Promotion
+	@ManyToOne
+	@JoinColumns({
+		@JoinColumn(name="ANNEE_UNIVERSITAIRE", referencedColumnName="ANNEE_UNIVERSITAIRE"),
+		@JoinColumn(name="CODE_FORMATION", referencedColumnName="CODE_FORMATION")
+		})
+	private Promotion promotion;
+
+	public Etudiant() {
+	}
+	
+	public Etudiant(String noEtudiant) {
         this.noEtudiant = noEtudiant;
-    }
-
-    public Etudiant(String noEtudiant, String nom, String prenom, String sexe, Date dateNaissance, String lieuNaissance, String nationalite, String email, String adresse, String ville, String paysOrigine, String universiteOrigine) {
-        this.noEtudiant = noEtudiant;
-        this.nom = nom;
-        this.prenom = prenom;
-        this.sexe = sexe;
-        this.dateNaissance = dateNaissance;
-        this.lieuNaissance = lieuNaissance;
-        this.nationalite = nationalite;
-        this.email = email;
-        this.adresse = adresse;
-        this.ville = ville;
-        this.paysOrigine = paysOrigine;
-        this.universiteOrigine = universiteOrigine;
-    }
-
-    public String getNoEtudiant() {
-        return noEtudiant;
-    }
-
-    public void setNoEtudiant(String noEtudiant) {
-        this.noEtudiant = noEtudiant;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public String getPrenom() {
-        return prenom;
-    }
-
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
-
-    public String getSexe() {
-        return sexe;
-    }
-
-    public void setSexe(String sexe) {
-        this.sexe = sexe;
-    }
-
-    public Date getDateNaissance() {
-        return dateNaissance;
-    }
-
-    public void setDateNaissance(Date dateNaissance) {
-        this.dateNaissance = dateNaissance;
-    }
-
-    public String getLieuNaissance() {
-        return lieuNaissance;
-    }
-
-    public void setLieuNaissance(String lieuNaissance) {
-        this.lieuNaissance = lieuNaissance;
-    }
-
-    public String getNationalite() {
-        return nationalite;
-    }
-
-    public void setNationalite(String nationalite) {
-        this.nationalite = nationalite;
-    }
-
-    public String getTelephone() {
-        return telephone;
-    }
-
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
-    }
-
-    public String getMobile() {
-        return mobile;
-    }
-
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getEmailUbo() {
-        return emailUbo;
-    }
-
-    public void setEmailUbo(String emailUbo) {
-        this.emailUbo = emailUbo;
-    }
-
-    public String getAdresse() {
-        return adresse;
-    }
-
-    public void setAdresse(String adresse) {
-        this.adresse = adresse;
-    }
-
-    public String getCodePostal() {
-        return codePostal;
-    }
-
-    public void setCodePostal(String codePostal) {
-        this.codePostal = codePostal;
-    }
-
-    public String getVille() {
-        return ville;
-    }
-
-    public void setVille(String ville) {
-        this.ville = ville;
-    }
-
-    public String getPaysOrigine() {
-        return paysOrigine;
-    }
-
-    public void setPaysOrigine(String paysOrigine) {
-        this.paysOrigine = paysOrigine;
-    }
-
-    public String getUniversiteOrigine() {
-        return universiteOrigine;
-    }
-
-    public void setUniversiteOrigine(String universiteOrigine) {
-        this.universiteOrigine = universiteOrigine;
-    }
-
-    public BigInteger getGroupeTp() {
-        return groupeTp;
-    }
-
-    public void setGroupeTp(BigInteger groupeTp) {
-        this.groupeTp = groupeTp;
-    }
-
-    public BigInteger getGroupeAnglais() {
-        return groupeAnglais;
-    }
-
-    public void setGroupeAnglais(BigInteger groupeAnglais) {
-        this.groupeAnglais = groupeAnglais;
     }
 
 	public Etudiant(@NotNull @Size(min = 1, max = 50) String noEtudiant, @NotNull @Size(min = 1, max = 50) String nom,
@@ -290,7 +120,8 @@ public class Etudiant implements Serializable {
 			@Size(max = 255) String emailUbo, @NotNull @Size(min = 1, max = 255) String adresse,
 			@Size(max = 10) String codePostal, @NotNull @Size(min = 1, max = 255) String ville,
 			@NotNull @Size(min = 1, max = 5) String paysOrigine,
-			@NotNull @Size(min = 1, max = 6) String universiteOrigine, BigInteger groupeTp, BigInteger groupeAnglais) {
+			@NotNull @Size(min = 1, max = 6) String universiteOrigine, BigInteger groupeTp, BigInteger groupeAnglais,
+			Promotion promotion) {
 		super();
 		this.noEtudiant = noEtudiant;
 		this.nom = nom;
@@ -310,7 +141,181 @@ public class Etudiant implements Serializable {
 		this.universiteOrigine = universiteOrigine;
 		this.groupeTp = groupeTp;
 		this.groupeAnglais = groupeAnglais;
+		this.promotion = promotion;
 	}
 
-        
+	public Promotion getPromotion() {
+		return promotion;
+	}
+
+
+	public void setPromotion(Promotion promotion) {
+		this.promotion = promotion;
+	}
+
+
+	public String getNoEtudiant() {
+		return this.noEtudiant;
+	}
+
+	public void setNoEtudiant(String noEtudiant) {
+		this.noEtudiant = noEtudiant;
+	}
+
+	public String getAdresse() {
+		return this.adresse;
+	}
+
+	public void setAdresse(String adresse) {
+		this.adresse = adresse;
+	}
+
+	public String getCodePostal() {
+		return this.codePostal;
+	}
+
+	public void setCodePostal(String codePostal) {
+		this.codePostal = codePostal;
+	}
+
+	public Date getDateNaissance() {
+		return this.dateNaissance;
+	}
+
+	public void setDateNaissance(Date dateNaissance) {
+		this.dateNaissance = dateNaissance;
+	}
+
+	public String getEmail() {
+		return this.email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getEmailUbo() {
+		return this.emailUbo;
+	}
+
+	public void setEmailUbo(String emailUbo) {
+		this.emailUbo = emailUbo;
+	}
+
+	public BigInteger getGroupeAnglais() {
+		return this.groupeAnglais;
+	}
+
+	public void setGroupeAnglais(BigInteger groupeAnglais) {
+		this.groupeAnglais = groupeAnglais;
+	}
+
+	public BigInteger getGroupeTp() {
+		return this.groupeTp;
+	}
+
+	public void setGroupeTp(BigInteger groupeTp) {
+		this.groupeTp = groupeTp;
+	}
+
+	public String getLieuNaissance() {
+		return this.lieuNaissance;
+	}
+
+	public void setLieuNaissance(String lieuNaissance) {
+		this.lieuNaissance = lieuNaissance;
+	}
+
+	public String getMobile() {
+		return this.mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public String getNationalite() {
+		return this.nationalite;
+	}
+
+	public void setNationalite(String nationalite) {
+		this.nationalite = nationalite;
+	}
+
+	public String getNom() {
+		return this.nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+	public String getPaysOrigine() {
+		return this.paysOrigine;
+	}
+
+	public void setPaysOrigine(String paysOrigine) {
+		this.paysOrigine = paysOrigine;
+	}
+
+	public String getPrenom() {
+		return this.prenom;
+	}
+
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
+	}
+
+	public String getSexe() {
+		return this.sexe;
+	}
+
+	public void setSexe(String sexe) {
+		this.sexe = sexe;
+	}
+
+	public String getTelephone() {
+		return this.telephone;
+	}
+
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
+	}
+
+	public String getUniversiteOrigine() {
+		return this.universiteOrigine;
+	}
+
+	public void setUniversiteOrigine(String universiteOrigine) {
+		this.universiteOrigine = universiteOrigine;
+	}
+
+	public String getVille() {
+		return this.ville;
+	}
+
+	public void setVille(String ville) {
+		this.ville = ville;
+	}
+
+	public Promotion getPromotionn() {
+		return this.promotion;
+	}
+
+	public void setPromotionn(Promotion promotion) {
+		this.promotion = promotion;
+	}
+
+	@Override
+	public String toString() {
+		return "Etudiant [noEtudiant=" + noEtudiant + ", nom=" + nom + ", prenom=" + prenom + ", sexe=" + sexe
+				+ ", dateNaissance=" + dateNaissance + ", lieuNaissance=" + lieuNaissance + ", nationalite="
+				+ nationalite + ", telephone=" + telephone + ", mobile=" + mobile + ", email=" + email + ", emailUbo="
+				+ emailUbo + ", adresse=" + adresse + ", codePostal=" + codePostal + ", ville=" + ville
+				+ ", paysOrigine=" + paysOrigine + ", universiteOrigine=" + universiteOrigine + ", groupeTp=" + groupeTp
+				+ ", groupeAnglais=" + groupeAnglais + ", promotion=" + promotion + "]";
+	}
+	
+	
+
 }
