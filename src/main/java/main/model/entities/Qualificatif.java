@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "QUALIFICATIF")
 @XmlRootElement
-public class Qualificatif implements Serializable {
+public class Qualificatif implements Serializable, Comparable<Qualificatif>{
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -94,23 +94,34 @@ public class Qualificatif implements Serializable {
         return hash;
     }
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Qualificatif)) {
-            return false;
-        }
-        Qualificatif other = (Qualificatif) object;
-        if ((this.idQualificatif == null && other.idQualificatif != null) || (this.idQualificatif != null && !this.idQualificatif.equals(other.idQualificatif))) {
-            return false;
-        }
-        return true;
-    }
 
 	@Override
 	public String toString() {
 		return "Qualificatif [idQualificatif=" + idQualificatif + ", maximal=" + maximal + ", minimal=" + minimal + "]";
 	}
 
+	@Override
+	public int compareTo(Qualificatif q) {
+		int lmin = Math.min(this.minimal.length(), q.minimal.length()); 
+		for (int i = 0; i < lmin; i++) { 
+            int str1_ch = (int)this.minimal.charAt(i); 
+            int str2_ch = (int)q.minimal.charAt(i); 
+  
+            if (str1_ch != str2_ch) { 
+                return str1_ch - str2_ch; 
+            } 
+        } 
+		if (this.minimal.length() != q.minimal.length()) { 
+            return this.minimal.length() -  q.minimal.length(); 
+        } 
+  
+        // If none of the above conditions is true, 
+        // it implies both the strings are equal 
+        else { 
+            return 0; 
+        } 
+	}
+	
+	
     
 }

@@ -1,6 +1,7 @@
 package main.model.business;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -28,8 +29,13 @@ public class QualificatifBusiness {
 		qualificatifRepo.save(qualificatif);
 	}
 	
-	public void update(Qualificatif qualificatif) {
-		qualificatifRepo.save(qualificatif);
+	public boolean update(Qualificatif qualificatif) {
+		List<Question> questions = questionRepo.findByQualificatif(qualificatif);
+		if(questions.isEmpty()) {
+			qualificatifRepo.save(qualificatif);
+			return true;
+		}
+		return false;
 	}
 	
 	public boolean delete(Qualificatif qualificatif) {
@@ -46,6 +52,7 @@ public class QualificatifBusiness {
 		for (Qualificatif q : qualificatifRepo.findAll()) {
 			qualificatifs.add(q);
 		}
+		Collections.sort(qualificatifs);
 		return qualificatifs;
 	}
 	
