@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "PROMOTION")
 @XmlRootElement
-public class Promotion implements Serializable {
+public class Promotion implements Serializable,Comparable<Promotion> {
 
     private static final long serialVersionUID = 1L;
     @EmbeddedId
@@ -181,6 +181,17 @@ public class Promotion implements Serializable {
 				+ nbMaxEtudiant + ", dateReponseLp=" + dateReponseLp + ", dateReponseLalp=" + dateReponseLalp
 				+ ", dateRentree=" + dateRentree + ", lieuRentree=" + lieuRentree + ", processusStage=" + processusStage
 				+ ", commentaire=" + commentaire + ", formation=" + formation ;
+	}
+
+	@Override
+	public int compareTo(Promotion o) {
+		
+		if(o.getPromotionPK().getAnneeUniversitaire().compareTo(this.getPromotionPK().getAnneeUniversitaire())>0){
+			return 1;
+		}else if(o.getPromotionPK().getAnneeUniversitaire().compareTo(this.getPromotionPK().getAnneeUniversitaire())<0){
+			return -1;
+		}
+		return 0;
 	}    
     
     
