@@ -28,6 +28,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/makhlouf/Desktop/Projet Agil/jars/ojdbc8-full/ojdbc8.jar"/>
+	<classpathentry kind="lib" path="C:/Users/unknown/Documents/projet/ojdbc8.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

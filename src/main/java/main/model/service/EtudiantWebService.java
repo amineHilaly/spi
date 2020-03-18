@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +26,7 @@ import main.model.business.EtudiantBusiness;
 import main.model.entities.Etudiant;
 import main.model.entities.Promotion;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("Etudiant")
 public class EtudiantWebService {
@@ -32,7 +34,7 @@ public class EtudiantWebService {
 	@Autowired
 	EtudiantBusiness etudiantBusiness;
 	
-	
+	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping(path="/etudiants", produces = "application/json")
 	public Collection<Etudiant> getAll(){
 		return etudiantBusiness.getAllEtudiants();
