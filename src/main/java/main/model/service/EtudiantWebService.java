@@ -22,9 +22,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import main.model.business.EtudiantBusiness;
-import main.model.entities.Etudiant;
-import main.model.entities.Promotion;
+import main.model.business.*;
+import main.model.entities.*;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
