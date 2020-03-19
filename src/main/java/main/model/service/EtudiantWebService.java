@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +27,7 @@ import main.model.entities.Etudiant;
 import main.model.entities.Promotion;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("Etudiant")
 public class EtudiantWebService {
 	
@@ -45,14 +47,30 @@ public class EtudiantWebService {
 	}
 	
 	@PostMapping(consumes = "application/json", produces = "application/json")
-	 public void creerEtudiant(@RequestBody Etudiant etudiant) {
-		System.out.println(etudiant);
-		etudiantBusiness.creerEtudiant(etudiant);
+	 public int creerEtudiant(@RequestBody Etudiant etudiant) {
+		try {
+			Etudiant e = etudiantBusiness.getEtudiantById(etudiant.getNoEtudiant()).get();
+			if(e != null) {
+				return 1;
+			}
+			System.out.println(etudiant);
+			etudiantBusiness.creerEtudiant(etudiant);
+			return 0;
+		}catch(Exception e) {
+			System.out.println(e);
+			return 2;
+		}
 	}
 	
 	@PutMapping()
-	public void updateEtudiant(@RequestBody Etudiant etudiant) {
-		etudiantBusiness.updateEtudiant(etudiant);
+	public boolean updateEtudiant(@RequestBody Etudiant etudiant) {
+		try {
+			etudiantBusiness.updateEtudiant(etudiant);
+			return true;
+		}catch(Exception e) {
+			System.out.println(e);
+			return false;
+		}
 	}
 	
 	@DeleteMapping("/{noEtudiant}")

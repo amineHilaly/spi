@@ -1,6 +1,7 @@
 package main.model.business;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,8 +30,12 @@ public class PromotionBusiness {
 	
 	
 	public List<Promotion> getAllPromotion(){
+		List<Promotion> promotions = (List<Promotion>) promotionRepo.findAll();
 		
-	return (List<Promotion>) promotionRepo.findAll();
+		Collections.sort(promotions);
+		
+	
+	return promotions ;
 	}
 	
 	

@@ -8,6 +8,7 @@ import java.util.Optional;
 //import javax.xml.validation.Validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +22,7 @@ import main.model.entities.Promotion;
 import main.model.entities.PromotionPK;
 
 @RestController
-//@RequestMapping("Promotion")
+@CrossOrigin(origins = "http://localhost:4200")
 public class PromotionService {
 	@Autowired
 	PromotionBusiness promotionBusiness;
@@ -76,7 +77,8 @@ public class PromotionService {
 	
 	@RequestMapping(value="/Etudiantspromotion", method=RequestMethod.POST)
 	public List<Etudiant> EtudiantsByPromotion(@RequestBody PromotionPK pk) {
-		
+		System.out.println(pk);
+		System.out.println(promotionBusiness.EtudiantByPromotion(pk));
 		return promotionBusiness.EtudiantByPromotion(pk);
 	}
 }
