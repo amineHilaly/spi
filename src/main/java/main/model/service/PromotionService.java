@@ -26,56 +26,50 @@ import main.model.entities.PromotionPK;
 public class PromotionService {
 	@Autowired
 	PromotionBusiness promotionBusiness;
-	
-	
-	
-	
-	@RequestMapping(value="/promotions", method=RequestMethod.GET)
+
+	@RequestMapping(value = "/promotions", method = RequestMethod.GET)
 	@GetMapping()
-	public List<Promotion> getAllPromotion(){
-		
-		System.out.println();
+	public List<Promotion> getAllPromotion() {
+
 		return promotionBusiness.getAllPromotion();
-		
+
 	}
-	
-	@RequestMapping(value="/promotions", method=RequestMethod.POST)
-	//@GetMapping()
+
+	@RequestMapping(value = "/promotions", method = RequestMethod.POST)
+	// @GetMapping()
 	public Promotion findpromotion(@RequestBody PromotionPK pk) {
-		
+
 		System.out.println(pk);
-		Optional<Promotion> promotionOp= promotionBusiness.findPromotion(pk);
+		Optional<Promotion> promotionOp = promotionBusiness.findPromotion(pk);
 		Promotion promotion = promotionOp.get();
 		return promotion;
-		
+
 	}
-		
-	@RequestMapping(value="/Addpromotions", method=RequestMethod.POST)
-	//@GetMapping()
+
+	@RequestMapping(value = "/Addpromotions", method = RequestMethod.POST)
+	// @GetMapping()
 	public boolean savePromotion(@RequestBody Promotion promotion) {
-		
-    return promotionBusiness.SavePromotion(promotion);
-		
+
+		return promotionBusiness.SavePromotion(promotion);
+
 	}
-	
-	@RequestMapping(value="/Updatepromotions", method=RequestMethod.PUT)
-	//@GetMapping()
+
+	@RequestMapping(value = "/Updatepromotions", method = RequestMethod.PUT)
+	// @GetMapping()
 	public boolean updatePromotion(@RequestBody Promotion promotion) {
-		
-    return promotionBusiness.UpdatePromotion(promotion);
-		
+
+		return promotionBusiness.UpdatePromotion(promotion);
+
 	}
-	
-	
-	
-	@RequestMapping(value="/Deletepromotion", method=RequestMethod.DELETE)
+
+	@RequestMapping(value = "/Deletepromotion", method = RequestMethod.DELETE)
 	public void DeletePromotion(@RequestBody PromotionPK promotion) {
 		promotionBusiness.deletePromotion(promotion);
 		System.out.println("bien supprimé");
-		
+
 	}
-	
-	@RequestMapping(value="/Etudiantspromotion", method=RequestMethod.POST)
+
+	@RequestMapping(value = "/Etudiantspromotion", method = RequestMethod.POST)
 	public List<Etudiant> EtudiantsByPromotion(@RequestBody PromotionPK pk) {
 		System.out.println(pk);
 		System.out.println(promotionBusiness.EtudiantByPromotion(pk));

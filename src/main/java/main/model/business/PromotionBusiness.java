@@ -33,12 +33,18 @@ public class PromotionBusiness {
 		List<Promotion> promotions = (List<Promotion>) promotionRepo.findAll();
 		
 		Collections.sort(promotions);
-		
-	
-	return promotions ;
+		for(Object[] Nbretudiant: promotionRepo.getNbEtudiant()) {
+			for(int i=0;i<promotions.size();i++)  {
+				if(promotions.get(i).getPromotionPK().getAnneeUniversitaire().equals(Nbretudiant[0]) && promotions.get(i).getPromotionPK().getFormation().getCodeFormation().equals(Nbretudiant[1]) ) {
+					String s= ""+Nbretudiant[2];
+					promotions.get(i).setNbrEtudiant((Integer.parseInt(s)));
+					System.out.println(Nbretudiant[2]);
+				}
+			}
+		}
+		System.out.println(promotions);
+		return promotions ;
 	}
-	
-	
 	public Optional<Promotion> findPromotion(PromotionPK pk) {
 		return promotionRepo.findById(pk);
 	}

@@ -102,7 +102,7 @@ public class Question implements Serializable {
 
     public Qualificatif getQualificatif() {
         return qualificatif;
-    }
+    }	
 
     public void setIdQualificatif(Qualificatif Qualificatif) {
         this.qualificatif = Qualificatif;
