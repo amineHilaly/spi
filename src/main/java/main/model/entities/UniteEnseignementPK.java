@@ -4,10 +4,6 @@ package main.model.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 
-/**
- * The primary key class for the unite_enseignement database table.
- * 
- */
 @Embeddable
 public class UniteEnseignementPK implements Serializable {
 	//default serial version id, required for serializable classes.

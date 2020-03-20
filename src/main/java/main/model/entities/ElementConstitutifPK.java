@@ -4,10 +4,7 @@ package main.model.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 
-/**
- * The primary key class for the element_constitutif database table.
- * 
- */
+
 @Embeddable
 public class ElementConstitutifPK implements Serializable {
 	//default serial version id, required for serializable classes.

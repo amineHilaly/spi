@@ -6,10 +6,6 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 
 
-/**
- * The persistent class for the unite_enseignement database table.
- * 
- */
 @Entity
 @Table(name="unite_enseignement")
 @NamedQuery(name="UniteEnseignement.findAll", query="SELECT u FROM UniteEnseignement u")

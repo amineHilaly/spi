@@ -10,10 +10,6 @@ import org.hibernate.annotations.JoinColumnsOrFormulas;
 import java.util.Date;
 
 
-/**
- * The persistent class for the evaluation database table.
- * 
- */
 @Entity
 @Table(name = "EVALUATION")
 public class Evaluation implements Serializable {
