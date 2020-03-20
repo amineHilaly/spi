@@ -70,11 +70,22 @@ public class Promotion implements Serializable,Comparable<Promotion> {
     @ManyToOne(optional = false)
     private Formation formation;
     
+    //le persistance ne prend pas ce champs en considération lors de prsist
+    @javax.persistence.Transient
+    private int nbrEtudiant;
     
     
     
    
 
+
+	public int getNbrEtudiant() {
+		return nbrEtudiant;
+	}
+
+	public void setNbrEtudiant(int nbrEtudiant) {
+		this.nbrEtudiant = nbrEtudiant;
+	}
 
 	public Promotion() {
     }
