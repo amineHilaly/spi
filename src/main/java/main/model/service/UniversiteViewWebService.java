@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import main.model.business.UniversiteViewBusiness;
 import main.model.entities.UniversiteView;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("Universites")

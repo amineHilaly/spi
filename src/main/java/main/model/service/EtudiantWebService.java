@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 import main.model.business.*;
 import main.model.entities.*;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("Etudiant")
@@ -33,7 +34,7 @@ public class EtudiantWebService {
 	@Autowired
 	EtudiantBusiness etudiantBusiness;
 	
-	
+	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping(path="/etudiants", produces = "application/json")
 	public Collection<Etudiant> getAll(){
 		return etudiantBusiness.getAllEtudiants();

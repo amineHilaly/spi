@@ -21,6 +21,7 @@ import main.model.entities.Etudiant;
 import main.model.entities.Promotion;
 import main.model.entities.PromotionPK;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 public class PromotionService {
