@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import main.model.business.QuestionBusiness;
 import main.model.entities.Promotion;
 import main.model.entities.Question;
+import main.model.entities.QuestionEvaluation;
 import main.model.entities.RubriqueQuestion;
 
 @RestController
@@ -43,8 +44,7 @@ public class QuestionService {
 		return questionBusiness.saveQuestion(question);
 
 	}
-	
-	
+
 	@RequestMapping(value = "/deleteQuestion", method = RequestMethod.POST)
 	@GetMapping()
 	public boolean deleteQuestion(@RequestBody Question question) {

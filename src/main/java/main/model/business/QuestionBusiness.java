@@ -7,8 +7,10 @@ import org.springframework.stereotype.Repository;
 
 import main.model.entities.Qualificatif;
 import main.model.entities.Question;
+import main.model.entities.QuestionEvaluation;
 import main.model.entities.RubriqueQuestion;
 import main.model.repositories.QualificatifRepository;
+import main.model.repositories.QuestionEvaluationRepository;
 import main.model.repositories.QuestionRepository;
 import main.model.repositories.RubriqueQuestionRepository;
 
@@ -22,6 +24,9 @@ public class QuestionBusiness {
 
 	@Autowired
 	private RubriqueQuestionRepository RQuestion;
+
+	@Autowired
+	private QuestionEvaluationRepository questionEvaluationRepository;
 
 	public List<Question> getAllQuestion() {
 
@@ -37,7 +42,8 @@ public class QuestionBusiness {
 		List<Question> questions = this.findQuestion(question);
 		Qualificatif qualificatif = qualificatifRepository.findById(question.getQualificatif().getIdQualificatif())
 				.get();
-		if (questions.isEmpty()) {
+		QuestionEvaluation questionEvaluation = questionEvaluationRepository.findByQuestionEvaluation(question);
+		if (questions.isEmpty() || questionEvaluation != null) {
 			if (qualificatif != null) {
 				question.setIdQuestion(questionRepository.getMaxId() + 1);
 				questionRepository.save(question);
@@ -51,8 +57,8 @@ public class QuestionBusiness {
 
 	public boolean deleteQuestion(Question question) {
 		RubriqueQuestion rebriqueQuestion = RQuestion.findByQuestion(question);
-
-		if (rebriqueQuestion != null) {
+		QuestionEvaluation questionEvaluation = questionEvaluationRepository.findByQuestionEvaluation(question);
+		if (rebriqueQuestion != null || questionEvaluation != null) {
 			System.out.println("le question est déjà referencier");
 			return false;
 		}
@@ -60,8 +66,7 @@ public class QuestionBusiness {
 		System.out.println("question supprimer");
 		return true;
 	}
-	
-	
+
 	public boolean updateQuestion(Question question) {
 		RubriqueQuestion rebriqueQuestion = RQuestion.findByQuestion(question);
 
@@ -71,6 +76,11 @@ public class QuestionBusiness {
 		}
 		questionRepository.save(question);
 		return true;
+	}
+
+	public QuestionEvaluation test(Question q) {
+
+		return questionEvaluationRepository.findByQuestionEvaluation(q);
 	}
 
 }
