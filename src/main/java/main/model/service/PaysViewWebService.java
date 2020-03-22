@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import main.model.business.PaysViewBusiness;
 import main.model.entities.PaysView;
 
-@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("Pays")
