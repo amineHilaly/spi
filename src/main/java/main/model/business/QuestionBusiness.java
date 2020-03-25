@@ -1,10 +1,12 @@
 package main.model.business;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import main.model.entities.Etudiant;
 import main.model.entities.Qualificatif;
 import main.model.entities.Question;
 import main.model.entities.RubriqueQuestion;
@@ -35,9 +37,22 @@ public class QuestionBusiness {
 
 	public boolean saveQuestion(Question question) {
 		List<Question> questions = this.findQuestion(question);
+		List<Question> intit = this.getAllQuestion();
+        boolean intituTrouv=false;
+        for(int i=0;i<intit.size();i++) {
+        	
+        	if(intit.get(i).getIntitule().equals(question.getIntitule())){
+        		
+        		intituTrouv= true;
+        	}
+        	
+        	
+        	
+        }
 		Qualificatif qualificatif = qualificatifRepository.findById(question.getQualificatif().getIdQualificatif())
 				.get();
-		if (questions.isEmpty()) {
+		if (questions.isEmpty() & !intituTrouv) {
+			   
 			if (qualificatif != null) {
 				question.setIdQuestion(questionRepository.getMaxId() + 1);
 				questionRepository.save(question);
@@ -53,11 +68,11 @@ public class QuestionBusiness {
 		RubriqueQuestion rebriqueQuestion = RQuestion.findByQuestion(question);
 
 		if (rebriqueQuestion != null) {
-			System.out.println("le question est déjà referencier");
+			System.out.println("le question est déjà referenciée");
 			return false;
 		}
 		questionRepository.delete(question);
-		System.out.println("question supprimer");
+		System.out.println("question supprimée");
 		return true;
 	}
 	
@@ -66,11 +81,12 @@ public class QuestionBusiness {
 		RubriqueQuestion rebriqueQuestion = RQuestion.findByQuestion(question);
 
 		if (rebriqueQuestion != null) {
-			System.out.println("le question est déjà referencier");
+			System.out.println("la question est déjà referenciée");
 			return false;
 		}
 		questionRepository.save(question);
 		return true;
 	}
+	
 
 }
