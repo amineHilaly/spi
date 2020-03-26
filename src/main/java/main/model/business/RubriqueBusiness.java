@@ -1,11 +1,16 @@
 package main.model.business;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import main.model.entities.Qualificatif;
 import main.model.entities.Rubrique;
 import main.model.repositories.RubriqueEvaluationRepository;
 import main.model.repositories.RubriqueRepository;
@@ -34,8 +39,10 @@ public class RubriqueBusiness {
 	}
 	
 	
-	public Collection<Rubrique> getAllRubriques(){
-		return (Collection<Rubrique>) rubriqueRepo.findAll();
+	public List<Rubrique> getAllRubriques(){
+		List<Rubrique> list = (List<Rubrique>) rubriqueRepo.findAll();
+		return list;
+		
 	}
 	
 	
