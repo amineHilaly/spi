@@ -30,10 +30,10 @@ public class UniteEnseignement implements Serializable {
 	private BigDecimal nbhCm;
 
 	@Column(name="NBH_TD")
-	private byte nbhTd;
+	private Float nbhTd;
 
 	@Column(name="NBH_TP")
-	private byte nbhTp;
+	private Float nbhTp;
 	
 	
 
@@ -82,19 +82,19 @@ public class UniteEnseignement implements Serializable {
 		this.nbhCm = nbhCm;
 	}
 
-	public byte getNbhTd() {
+	public Float getNbhTd() {
 		return this.nbhTd;
 	}
 
-	public void setNbhTd(byte nbhTd) {
+	public void setNbhTd(Float nbhTd) {
 		this.nbhTd = nbhTd;
 	}
 
-	public byte getNbhTp() {
+	public Float getNbhTp() {
 		return this.nbhTp;
 	}
 
-	public void setNbhTp(byte nbhTp) {
+	public void setNbhTp(Float nbhTp) {
 		this.nbhTp = nbhTp;
 	}
 

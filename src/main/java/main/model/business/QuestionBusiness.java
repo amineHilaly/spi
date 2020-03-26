@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import main.model.entities.Qualificatif;
 import main.model.entities.Question;
@@ -49,7 +50,9 @@ public class QuestionBusiness {
 		return false;
 	}
 
-	public boolean deleteQuestion(Question question) {
+	public boolean deleteQuestion(@PathVariable long id) {
+		Question question = new Question();
+		question.setIdQuestion(id);
 		RubriqueQuestion rebriqueQuestion = RQuestion.findByQuestion(question);
 
 		if (rebriqueQuestion != null) {

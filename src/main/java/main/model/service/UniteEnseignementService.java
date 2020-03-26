@@ -30,8 +30,8 @@ public class UniteEnseignementService {
 
 	@RequestMapping(method=RequestMethod.GET, value="/{codeFormation}", produces = "application/json")
 	public List<UniteEnseignement> recupererUeParFormation(@PathVariable String codeFormation) {
-		return ueBusiness.rechercherParFormation(codeFormation);
-		
+		System.out.println(codeFormation);
+		return ueBusiness.rechercherParFormation(codeFormation);		
 	}
 	
 	@RequestMapping(method=RequestMethod.GET, value="/ensfor/{noEnseignant}/{codeFormation}", produces = "application/json")
