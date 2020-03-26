@@ -58,16 +58,17 @@ public class EtudiantWebService {
 	
 	@PostMapping(consumes = "application/json", produces = "application/json")
 	 public int creerEtudiant(@RequestBody Etudiant etudiant) {
+		System.out.println(etudiant);
 		try {
-			Etudiant e = etudiantBusiness.getEtudiantById(etudiant.getNoEtudiant()).get();
-			if(e != null) {
+			Optional <Etudiant> e = etudiantBusiness.getEtudiantById(etudiant.getNoEtudiant());
+			if(e.isPresent()) {
 				return 1;
 			}
 			System.out.println(etudiant);
 			etudiantBusiness.creerEtudiant(etudiant);
 			return 0;
 		}catch(Exception e) {
-			System.out.println(e);
+			e.printStackTrace();;
 			return 2;
 		}
 	}
