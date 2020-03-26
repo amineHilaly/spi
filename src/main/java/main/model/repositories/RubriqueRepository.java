@@ -15,6 +15,9 @@ public interface RubriqueRepository extends CrudRepository<Rubrique, Long> {
 	@Query(value = "SELECT max(id_Rubrique) FROM rubrique ",   nativeQuery = true)
 	public Long getMaxId();
 	
+	@Query(value = "SELECT * FROM rubrique ORDER BY designation ", nativeQuery = true)
+	public List<Rubrique> findAll();
+	
 
 	
 }
