@@ -1,6 +1,10 @@
 Manifest-Version: 1.0
-Build-Jdk-Spec: 11
+Built-By: Mac
+Build-Jdk: 10.0.1
 Implementation-Title: SPII
 Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: com.example
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/SPII
 Created-By: Maven Integration for Eclipse
 
