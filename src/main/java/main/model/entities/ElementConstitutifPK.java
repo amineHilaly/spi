@@ -71,4 +71,12 @@ public class ElementConstitutifPK implements Serializable {
 		
 		return hash;
 	}
+
+	@Override
+	public String toString() {
+		return "ElementConstitutifPK [codeFormation=" + codeFormation + ", codeUe=" + codeUe + ", codeEc=" + codeEc
+				+ "]";
+	}
+	
+	
 }

@@ -45,6 +45,17 @@ public class EtudiantWebService {
 		return etudiantBusiness.getEtudiantById(noEtudiant);
 	}
 	
+	
+	//jjjjjjjjjjjjjjjjjjjjjjj
+	
+	@GetMapping(path="/nom/{nom}", produces = "application/json")
+	public Etudiant getEtudiantByNom(@PathVariable String nom) {
+		return etudiantBusiness.findByNom(nom);
+	}
+	
+	
+	
+	
 	@PostMapping(consumes = "application/json", produces = "application/json")
 	 public int creerEtudiant(@RequestBody Etudiant etudiant) {
 		try {

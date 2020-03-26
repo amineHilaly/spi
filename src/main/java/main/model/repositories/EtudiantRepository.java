@@ -13,4 +13,6 @@ public interface EtudiantRepository extends CrudRepository<Etudiant, String> {
 	
 	List<Etudiant> findByPromotion(Promotion promo);
 
+	Etudiant findByNom(String nom);
+
 }

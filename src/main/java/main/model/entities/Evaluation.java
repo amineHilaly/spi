@@ -17,13 +17,14 @@ public class Evaluation implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "id_Sequence")
+	@SequenceGenerator(name = "id_Sequence", sequenceName = "EVE_SEQ" , allocationSize = 1)
 	@Column(name="ID_EVALUATION")
 	private int idEvaluation;
 
 	//uni-directional many-to-one association to Enseignant
 	@ManyToOne
-	@JoinColumn(name="NO_ENSEIGNANT")
+	@JoinColumn(name="NO_ENSEIGNANT",updatable = false)
 	private Enseignant enseignant;
 
 	//uni-directional many-to-one association to ElementConstitutif
@@ -83,6 +84,18 @@ public class Evaluation implements Serializable {
 
 	public Evaluation() {
 	}
+	
+	
+
+	@Override
+	public String toString() {
+		return "Evaluation [idEvaluation=" + idEvaluation + ", enseignant=" + enseignant + ", elementConstitutif="
+				+ elementConstitutif + ", promotion=" + promotion + ", noEvaluation=" + noEvaluation + ", designation="
+				+ designation + ", etat=" + etat + ", periode=" + periode + ", debutReponse=" + debutReponse
+				+ ", finReponse=" + finReponse + ", uniteEnseignement=" + uniteEnseignement + "]";
+	}
+
+
 
 	public int getIdEvaluation() {
 		return this.idEvaluation;

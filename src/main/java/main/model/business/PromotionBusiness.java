@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import main.model.entities.Etudiant;
+import main.model.entities.Evaluation;
 import main.model.entities.Promotion;
 import main.model.entities.PromotionPK;
 import main.model.entities.Qualificatif;
 import main.model.repositories.EtudiantRepository;
+import main.model.repositories.EvaluationRepository;
 import main.model.repositories.PromotionRepository;
 import main.model.repositories.QualificatifRepository;
 
@@ -26,6 +28,9 @@ public class PromotionBusiness {
 	private PromotionRepository promotionRepo;
 	@Autowired
 	private EtudiantRepository etudiantRepo;
+	
+	@Autowired
+	private EvaluationRepository evaluationRepo;
 	
 	
 	
@@ -81,6 +86,12 @@ public class PromotionBusiness {
 	public List<Etudiant> EtudiantByPromotion(PromotionPK promotionpk){
 		Promotion promotion = promotionRepo.findById(promotionpk).get();
 		return etudiantRepo.findByPromotion(promotion);
+	}
+	
+	
+	public List<Evaluation> evaluationtByPromotion(PromotionPK promotionpk){
+		Promotion promotion = promotionRepo.findById(promotionpk).get();
+		return evaluationRepo.findByPromotion(promotion);
 	}
 	
 		

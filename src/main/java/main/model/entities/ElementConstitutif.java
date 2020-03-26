@@ -109,4 +109,13 @@ public class ElementConstitutif implements Serializable {
 		this.uniteEnseignement = uniteEnseignement;
 	}
 
+	@Override
+	public String toString() {
+		return "ElementConstitutif [id=" + id + ", description=" + description + ", designation=" + designation
+				+ ", nbhCm=" + nbhCm + ", nbhTd=" + nbhTd + ", nbhTp=" + nbhTp + ", enseignant=" + enseignant
+				+ ", uniteEnseignement=" + uniteEnseignement + "]";
+	}
+	
+	
+
 }

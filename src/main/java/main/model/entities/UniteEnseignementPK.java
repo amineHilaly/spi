@@ -50,6 +50,13 @@ public class UniteEnseignementPK implements Serializable {
 			&& this.codeUe.equals(castOther.codeUe);
 	}
 
+	
+	
+	@Override
+	public String toString() {
+		return "UniteEnseignementPK [codeFormation=" + codeFormation + ", codeUe=" + codeUe + "]";
+	}
+
 	public int hashCode() {
 		final int prime = 31;
 		int hash = 17;

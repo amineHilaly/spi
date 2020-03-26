@@ -22,7 +22,7 @@ public class QuestionService {
 	@Autowired
 	QuestionBusiness questionBusiness;
 
-	@RequestMapping(value = "/questions", method = RequestMethod.GET)
+	@RequestMapping(value = "/questions", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
 	@GetMapping()
 	public List<Question> getAllQuestion() {
 
@@ -30,7 +30,7 @@ public class QuestionService {
 
 	}
 
-	@RequestMapping(value = "/question", method = RequestMethod.POST)
+	@RequestMapping(value = "/question", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
 	@GetMapping()
 	public List<Question> getQuestion(@RequestBody Question question) {
 		return questionBusiness.findQuestion(question);
