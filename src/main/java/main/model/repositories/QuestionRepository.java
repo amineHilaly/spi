@@ -13,7 +13,6 @@ public interface QuestionRepository extends CrudRepository<Question, Long> {
 
 	public List<Question> findByIntitule(String intitule);
 
-
 	@Query(value = "SELECT max(ID_QUESTION) FROM question", nativeQuery = true)
 	public Long getMaxId();
 }

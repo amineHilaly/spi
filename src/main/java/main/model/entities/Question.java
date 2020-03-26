@@ -52,7 +52,7 @@ public class Question implements Serializable {
     @ManyToOne
     private Enseignant noEnseignant;
     @JoinColumn(name = "ID_QUALIFICATIF", referencedColumnName = "ID_QUALIFICATIF")
-    @ManyToOne(optional = false , cascade = {CascadeType.ALL})
+    @ManyToOne(optional = false)
     private Qualificatif qualificatif;
     
     public Question() {

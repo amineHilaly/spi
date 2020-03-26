@@ -35,6 +35,9 @@ public class EvaluationService {
 		try {
 			Enseignant e = new Enseignant(1); 
 			evaluation.setEnseignant(e);
+			if(evaluation.getElementConstitutif().getId().getCodeEc() == null) {
+				evaluation.setElementConstitutif(null);
+			}
 			System.out.println(evaluation);
 			evaluationBusiness.creerEvaluation(evaluation);
 			return true;
