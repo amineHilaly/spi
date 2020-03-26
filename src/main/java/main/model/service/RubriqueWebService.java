@@ -34,6 +34,7 @@ public class RubriqueWebService {
 	
 	
 	@GetMapping()
+	@RequestMapping(produces = "application/json; charset=utf-8")
 	public Collection<Rubrique> getAll(){
 		return RubriqueBusiness.getAllRubriques();
 		
@@ -45,28 +46,35 @@ public class RubriqueWebService {
 	}
 	
 	@PostMapping(consumes = "application/json", produces = "application/json")
-    public Rubrique creerRubrique(@RequestBody Rubrique Rubrique) {
-		return RubriqueBusiness.creerRubrique(Rubrique);
+    public boolean creerRubrique(@RequestBody Rubrique Rubrique) {
+	    try {
+	    	RubriqueBusiness.creerRubrique(Rubrique);
+	    	return true;
+	    }catch (Exception e) {
+			System.out.println(e);
+			return false;
+		}
 	}
 	
-	@PutMapping()
-	public @ResponseBody ResponseEntity<String> updateRubrique(@RequestBody Rubrique rubrique) {
+	@PostMapping(path="/update")
+	public boolean updateRubrique(@RequestBody Rubrique rubrique) {
+
 		if (  RubriqueBusiness.updateRubrique(rubrique) == true) {
-			return new ResponseEntity<String>("update OK", HttpStatus.OK);
+			return true;
 		}
 		else {
-		return new ResponseEntity<String>("la Rubrique est deja reference", HttpStatus.OK);
+		return false;
 		}
 		
 	}
 	
 	@DeleteMapping("/{noRubrique}")
-	public @ResponseBody ResponseEntity<String> deleteRubrique(@PathVariable Long noRubrique) {
+	public boolean deleteRubrique(@PathVariable Long noRubrique) {
 		try {
 			RubriqueBusiness.deleteRubriqueById(noRubrique);
-			return new ResponseEntity<String>("Rubrique a été suprimé", HttpStatus.OK);
+			return true;
 		} catch(Exception e) {
-			return new ResponseEntity<String>("la Rubrique est deja reference", HttpStatus.OK);
+			return false;
 		}
 	    
 	}
