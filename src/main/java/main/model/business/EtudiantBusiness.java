@@ -31,6 +31,11 @@ public class EtudiantBusiness {
 	public Collection<Etudiant> getAllEtudiants(){
 		return (Collection<Etudiant>) etudiantRepo.findAll();
 	}
+	//mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+	
+	public Etudiant findByNom(String nom){
+		return (Etudiant) etudiantRepo.findByNom(nom);
+	}
 	
 	
 	public Optional<Etudiant> getEtudiantById(String noEtudiant) {

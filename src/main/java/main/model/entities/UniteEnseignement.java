@@ -122,4 +122,13 @@ public class UniteEnseignement implements Serializable {
 		this.formation = formation;
 	}
 
+	@Override
+	public String toString() {
+		return "UniteEnseignement [id=" + id + ", designation=" + designation + ", description=" + description
+				+ ", semestre=" + semestre + ", nbhCm=" + nbhCm + ", nbhTd=" + nbhTd + ", nbhTp=" + nbhTp
+				+ ", enseignant=" + enseignant + ", formation=" + formation + "]";
+	}
+	
+	
+
 }

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import main.model.business.EtudiantBusiness;
 import main.model.business.PromotionBusiness;
 import main.model.entities.Etudiant;
+import main.model.entities.Evaluation;
 import main.model.entities.Promotion;
 import main.model.entities.PromotionPK;
 
@@ -75,4 +76,11 @@ public class PromotionService {
 		System.out.println(promotionBusiness.EtudiantByPromotion(pk));
 		return promotionBusiness.EtudiantByPromotion(pk);
 	}
+	
+	@RequestMapping(value = "/evalpromo", method = RequestMethod.POST)
+	public List<Evaluation> evaluationsByPromotion(@RequestBody PromotionPK pk) {
+		
+		return promotionBusiness.evaluationtByPromotion(pk);
+	}
+	
 }
