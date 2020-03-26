@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "QUESTION")
 @XmlRootElement
-public class Question implements Serializable {
+public class Question implements Serializable, Comparable<Question> {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -133,5 +133,29 @@ public class Question implements Serializable {
     public String toString() {
         return "model.Question[ idQuestion=" + idQuestion + " ]";
     }
+
+	@Override
+	public int compareTo(Question q) {
+		
+		
+		int lmin = Math.min(this.intitule.length(), q.intitule.length()); 
+		for (int i = 0; i < lmin; i++) { 
+            int str1_ch = (int)this.intitule.charAt(i); 
+            int str2_ch = (int)q.intitule.charAt(i); 
+  
+            if (str1_ch != str2_ch) { 
+                return str1_ch - str2_ch; 
+            } 
+        } 
+		if (this.intitule.length() != q.intitule.length()) { 
+            return this.intitule.length() -  q.intitule.length(); 
+        } 
+  
+        // If none of the above conditions is true, 
+        // it implies both the strings are equal 
+        else { 
+            return 0; 
+        } 
+	}	
     
 }

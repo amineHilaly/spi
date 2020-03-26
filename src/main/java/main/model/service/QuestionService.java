@@ -47,13 +47,7 @@ public class QuestionService {
 	}
 	
 	
-	
-	@DeleteMapping("Questions/{id}")
-	public boolean deleteQuestion(@PathVariable long id) {
-		System.out.println("test delete");
-		return questionBusiness.deleteQuestion(id);
 
-	}
 
 	@RequestMapping(value = "/updateQuestion", method = RequestMethod.POST)
 	@GetMapping()
@@ -61,5 +55,23 @@ public class QuestionService {
 		return questionBusiness.updateQuestion(question);
 
 	}
+	@DeleteMapping("/Questions/{id}")
+	public boolean delete(@PathVariable long id) {
+		try {
+			Question question = new Question();
+			question.setIdQuestion(id);
+			boolean res = questionBusiness.deleteQuestion(question);
+			return  res;
+		}catch(Exception e ) {
+			
+			return false;
+		}
+		
+	}
+	@RequestMapping(value = "/ref", method = RequestMethod.POST)
+	@GetMapping()
+	public Boolean ref(@RequestBody Question question) {
+		return questionBusiness.ref(question);
 
+	}
 }

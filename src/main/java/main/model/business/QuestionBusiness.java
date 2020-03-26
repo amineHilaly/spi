@@ -1,5 +1,6 @@
 package main.model.business;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +26,10 @@ public class QuestionBusiness {
 	private RubriqueQuestionRepository RQuestion;
 
 	public List<Question> getAllQuestion() {
-
-		return (List<Question>) questionRepository.findAll();
+		
+        List <Question> questions = (List<Question>) questionRepository.findAll();
+		Collections.sort(questions);
+		return questions;
 	}
 
 	public List<Question> findQuestion(Question question) {
@@ -36,9 +39,22 @@ public class QuestionBusiness {
 
 	public boolean saveQuestion(Question question) {
 		List<Question> questions = this.findQuestion(question);
+		List<Question> intit = this.getAllQuestion();
+        boolean intituTrouv=false;
+        for(int i=0;i<intit.size();i++) {
+        	
+        	if(intit.get(i).getIntitule().equals(question.getIntitule())){
+        		
+        		intituTrouv= true;
+        	}
+        	
+        	
+        	
+        }
 		Qualificatif qualificatif = qualificatifRepository.findById(question.getQualificatif().getIdQualificatif())
 				.get();
-		if (questions.isEmpty()) {
+		if (questions.isEmpty() & !intituTrouv) {
+			   
 			if (qualificatif != null) {
 				question.setIdQuestion(questionRepository.getMaxId() + 1);
 				questionRepository.save(question);
@@ -50,30 +66,54 @@ public class QuestionBusiness {
 		return false;
 	}
 
-	public boolean deleteQuestion(@PathVariable long id) {
-		Question question = new Question();
-		question.setIdQuestion(id);
-		RubriqueQuestion rebriqueQuestion = RQuestion.findByQuestion(question);
-
-		if (rebriqueQuestion != null) {
-			System.out.println("le question est déjà referencier");
-			return false;
-		}
-		questionRepository.delete(question);
-		System.out.println("question supprimer");
-		return true;
-	}
+	
 	
 	
 	public boolean updateQuestion(Question question) {
+		List<Question> intit = this.getAllQuestion();
+        int j =0;
+        for(int i=0;i<intit.size();i++) {
+        	
+        	if(intit.get(i).getIntitule().equals(question.getIntitule()) & intit.get(i).getIdQuestion() != question.getIdQuestion() ){
+        		j++;
+        	}
+        	
+        	
+        	
+        }
+		RubriqueQuestion rebriqueQuestion = RQuestion.findByQuestion(question);
+
+		
+	    if(j>0){
+			System.out.println("l'intitulé existe déja");
+
+			return false;
+	
+		}
+		
+		questionRepository.save(question);
+		return true;
+	}
+	public boolean deleteQuestion(Question question) {
 		RubriqueQuestion rebriqueQuestion = RQuestion.findByQuestion(question);
 
 		if (rebriqueQuestion != null) {
-			System.out.println("le question est déjà referencier");
+			System.out.println("le question est déjà referenciée");
 			return false;
 		}
-		questionRepository.save(question);
+		questionRepository.delete(question);
+		System.out.println("question supprimée");
 		return true;
+	}
+	public boolean ref(Question question) {
+		RubriqueQuestion rebriqueQuestion = RQuestion.findByQuestion(question);
+
+		if (rebriqueQuestion != null) {
+			System.out.println("le question est déjà referenciée");
+			return true;
+		}
+		return false;
+		
 	}
 
 }
