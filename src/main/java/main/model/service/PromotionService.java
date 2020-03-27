@@ -1,5 +1,6 @@
 package main.model.service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -74,7 +75,9 @@ public class PromotionService {
 	public List<Etudiant> EtudiantsByPromotion(@RequestBody PromotionPK pk) {
 		System.out.println(pk);
 		System.out.println(promotionBusiness.EtudiantByPromotion(pk));
-		return promotionBusiness.EtudiantByPromotion(pk);
+		List<Etudiant> etudiants = promotionBusiness.EtudiantByPromotion(pk);
+		Collections.sort(etudiants);
+		return etudiants;
 	}
 	
 	@RequestMapping(value = "/evalpromo", method = RequestMethod.POST)

@@ -16,7 +16,7 @@ import main.model.entities.Promotion;
  * 
  */
 @Entity
-public class Etudiant implements Serializable {
+public class Etudiant implements Serializable, Comparable<Etudiant> {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -314,6 +314,11 @@ public class Etudiant implements Serializable {
 				+ emailUbo + ", adresse=" + adresse + ", codePostal=" + codePostal + ", ville=" + ville
 				+ ", paysOrigine=" + paysOrigine + ", universiteOrigine=" + universiteOrigine + ", groupeTp=" + groupeTp
 				+ ", groupeAnglais=" + groupeAnglais + ", promotion=" + promotion + "]";
+	}
+
+	@Override
+	public int compareTo(Etudiant e) {
+		return this.getNom().compareTo(e.getNom());
 	}
 	
 	
